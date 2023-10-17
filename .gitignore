@@ -2,5 +2,5 @@ venv/
 media/contents/
 media/student_profiles/
 media/Course_thumbnails/
-media/contents/
+contents/
 cstm.py
