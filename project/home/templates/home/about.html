@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block basic %}
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCookies">
+    <div class="offcanvas-header bg-dark"><button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button></div>
+    <div class="offcanvas-body bb-0fc">
+        <p><br>When you visit any website, it may store or retrieve information on your browser, mostly in the form of cookies. This information might be about you, your preferences or your device and is mostly used to make the site work as you expect it to. The information does not usually directly identify you, but it can give you a more personalized web experience.We respect your right to privacy. However, blocking some types of cookies may impact your experience of the site and the services we are able to offer.<br><br></p>
+    </div>
+</div>
+<section class="mh-100">
+    <div style="z-index: 1000;background: #f1e9e9;"><video class="w-100 h-auto" width="560" height="315" autoplay="" loop="" muted="" style="z-index: -1;">
+            <source src="https://openaicomproductionae4b.blob.core.windows.net/production-twill-01/121dd5e0-eaea-424d-bdf2-db02ca1f5e55/gpt-4-92586ac_1080p60.mp4" type="video/webm">
+        </video></div>
+</section>
+<section class="py-3 sec-2-m-h">
+    <div class="container my-5">
+        <h1 class="main-s1-hl Alatsi"><strong>As a mission-driven organization, we're relentlessly pursuing our vision of a world where every learner can access education to unlock their potential, without the barriers of cost or location.</strong><br><br>ULearn&nbsp;classes are taught by industry leaders excited to share their tools, techniques, and professional journeys with you.<br><br>Whether it's a first brush on canvas or the last frame in an animation, ULearn is here to support you on every step of your creative journey.<br></h1>
+        <div></div>
+    </div>
+</section>
+<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center my-5 pb-5" style="height: 310px;background: url(../../../media/site/student-story-hero-mimi-2db67d79c97f1e7ab893208cd4bb17d6.webp) center / cover no-repeat;">
+    <div>
+        <h1 class="text-center fc-white Alatsi">“The thing I thought couldn’t be possible a year or two ago, is actually happening.”<br></h1>
+        <p class="text-center fc-white fs-4 fw-bold">–Mimi Chao, artist, student&nbsp;&amp;&nbsp;ULearn teacher<br></p>
+        <div class="d-xxl-flex justify-content-xxl-center"><a class="btn btn-primary Alatsi fs-4 b" role="button" href="{% url 'home:ourhero' %}">Watch Mimi's Story</a></div>
+    </div>
+</div><!-- Start: Footer Dark -->
+{% endblock %}

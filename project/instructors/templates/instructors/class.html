@@ -1,0 +1,80 @@
+{% extends 'navs-profs.html' %}
+
+{% block navs %}
+
+
+
+
+
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas">
+    <div class="offcanvas-header bg-light">
+        <h5 class="offcanvas-title">Modules</h5><button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+        <ul class="list-group">
+    {% for module in course.module_set.all %}
+      <li class="list-group-item"><i class="fa fa-check-circle-o fs-5"></i> <a href="{% url 'instructors:course_class-p' module.id course.id %}"><span>{{ module.title }}</span></a></li>
+    {% endfor %}
+
+        </ul>
+    </div>
+</div>
+  <!---->
+  <div id="wrapper">
+    
+    
+    <div id="customAlert" class="custom-alert"><span class="alert-message"></span><button class="close-alert" onclick="closeCustomAlert()">&times;</button></div>
+
+    <!---->
+    <div class="d-flex flex-column" id="content-wrapper">
+
+      
+
+      <!---->
+      {% if is_video %}
+      <div id="content" class="white">
+        
+        <div class="container py-5 px-5">
+          <video class="video-element w-100 h-auto mt-4" width="560" height="315" controls poster="{{course.image.url}}" >
+            <source src="{{module.file.url}}" type="video/mp4" />
+          </video>
+          <div class="card mt-5 mb-2" style="border-style: none;">
+            <div class="card-body" style="border-radius: 10px;border: 2px solid rgba(0,0,0,0.9) ;">
+              <h4 class="card-title Alatsi fc-dark-l m-0">{{module.title}}</h4>
+            </div>
+          </div>
+          {% if module.description %}
+          <h3 class="Alatsi fc-dark-l">Description</h3>
+          <p class="fs-5 fw-bold mb-4">{{module.description}}</p>
+          {% endif %}
+          <a class="btn btn-primary" role="button" data-bs-toggle="offcanvas"
+            href="#offcanvas"><i class="fa fa-list-ul"></i>&nbsp;List</a>
+        </div>
+        
+        {% else %}
+        <div id="content">
+
+          <div class="container py-5 px-5 vh-100">
+              <div class="card my-5" style="border-style: none;">
+                  <div class="card-body px-4" style="border-radius: 29px;border: 2px solid rgba(0,0,0,0.9) ;">
+                      <h4 class="card-title my-3 Alatsi fc-dark-l">RESOURCES</h4>
+                      <p class="card-text fc-dark-l">Download Resources ({{module.title}})</p>
+                      <a class="card-link " href="{{module.file.url}}"><i class="fas fa-cloud-download-alt fs-3"></i></a>
+                  </div>
+              </div>
+              {% if module.description %}
+              <h3 class="Alatsi fc-dark-l">Description</h3>
+              <p class="fs-5 fw-bold mb-5">{{module.description}}</p>
+              {% endif %}
+              <a class="btn btn-primary" role="button" data-bs-toggle="offcanvas" href="#offcanvas"><i class="fa fa-list-ul"></i>&nbsp;List</a>
+          </div>
+      </div>
+      {% endif %}
+
+    
+    
+    </div></div></div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div></div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script><script src="https://code.jquery.com/jquery-3.7.0.min.js"></script><script src="../../../static/js/script.min.js"></script></body></html>
+
+          {% endblock %}        
+           

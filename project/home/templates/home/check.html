@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  </head>
+  <body>
+    {% for course in courses %}
+    <div style="margin: 10px; padding: 10px">
+      <img src="{{course.image.url}}" alt="" style="margin: 10px" />
+      <h1 style="margin: 10px">{{course.title}}</h1>
+      <p style="margin: 10px">{{course.description}}</p>
+      {% for module in course.module_set.all %}
+      <video controls class="video-element">
+        <source src="{{module.file.url}}" type="video/mp4" />
+      </video>
+      <script>
+        const video = document.querySelector(".video-element");
+        const completionThreshold = 90; // Set the completion threshold (e.g., 90%)
+        let videoDuration = NaN;
+        let isVideoCompleted = false;
+      
+        video.addEventListener("loadedmetadata", function () {
+          videoDuration = video.duration;
+        });
+      
+        // Listen for user interaction with the video controls
+        video.addEventListener("play", function () {
+          if (!isNaN(videoDuration) && !isVideoCompleted) {
+            // While the video is playing, track the progress
+            video.addEventListener("timeupdate", trackProgress);
+          }
+        });
+      
+        video.addEventListener("pause", function () {
+          // When the video is paused, remove the 'timeupdate' listener
+          video.removeEventListener("timeupdate", trackProgress);
+        });
+      
+        function trackProgress() {
+          const currentTime = video.currentTime;
+          const percentComplete = (currentTime / videoDuration) * 100;
+      
+          if (percentComplete >= completionThreshold && !isVideoCompleted) {
+            // Mark the video as completed
+            isVideoCompleted = true;
+            markModuleAsCompleted();
+          }
+        }
+      
+        function markModuleAsCompleted() {
+          $.ajax({
+            type: "POST",
+            url: "{% url 'home:mark_video_completed'%}",
+            dataType: "json",
+            async: true,
+            data: {
+              module_id: "{{module.id}}",
+              csrfmiddlewaretoken: "{{csrf_token}}",
+            },
+            success: function () {
+              alert("success");
+            },
+          });
+        }
+      </script>
+      
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </body>
+</html>

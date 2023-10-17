@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+ {% block basic %}
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCookies">
+    <div class="offcanvas-header bg-dark"><button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button></div>
+    <div class="offcanvas-body bb-0fc">
+        <p><br>When you visit any website, it may store or retrieve information on your browser, mostly in the form of cookies. This information might be about you, your preferences or your device and is mostly used to make the site work as you expect it to. The information does not usually directly identify you, but it can give you a more personalized web experience.We respect your right to privacy. However, blocking some types of cookies may impact your experience of the site and the services we are able to offer.<br><br></p>
+    </div>
+</div>
+<section class="mh-100 min-vh-100">
+    <div class="container" style="height: 75vh;">
+        <div class="row h-100">
+            <div class="col-md-6 d-flex d-md-flex d-xl-flex align-items-center align-items-md-center align-items-xl-center">
+                <div class="h-auto"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-stars main-s1-hl mb-1" style="color: var(--bs-yellow);">
+                        <path d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828l.645-1.937zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.734 1.734 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.734 1.734 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.734 1.734 0 0 0 3.407 2.31l.387-1.162zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L10.863.1z"></path>
+                    </svg>
+                    <h1 class="main-s1-hl"><strong>Stay Curious, </strong><br><strong>Stay Ahead</strong>:<br></h1><span class="main-s1-spn">Unlock the door to knowledge and<br>empower your journey of lifelong learning<br></span>
+                    <div class="mt-4"><a class="button-black h-100 py-3" href="{% url 'students:register_student' %}">LEARN NOW</a></div>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex d-sm-flex d-lg-flex justify-content-end align-items-end justify-content-sm-end align-items-sm-end justify-content-lg-end align-items-lg-end">
+                <h5 class="mb-5 fsajg"><span class="stkt p-1">*</span>Free start and job<br>&nbsp; &nbsp; gurantee for all students</h5>
+            </div>
+        </div>
+    </div>
+    <div class="container p-0 mb-0" style="height: auto;min-height: 15vh;">
+        <div class="row h-100 m-0">
+            <div class="col-md-3 d-lg-flex align-items-lg-center border-r-l">
+                <div>
+                    <h3 class="main-hm-sub-block-hs">35k+</h3>
+                    <p>Trained Students</p>
+                </div>
+            </div>
+            <div class="col-md-3 d-lg-flex align-items-lg-center border-r-l">
+                <div>
+                    <h3 class="main-hm-sub-block-hs">1k+</h3>
+                    <p>Teaching Hours</p>
+                </div>
+            </div>
+            <div class="col-md-3 d-lg-flex align-items-lg-center border-r-l">
+                <div>
+                    <h3 class="main-hm-sub-block-hs">50+</h3>
+                    <p>Companies</p>
+                </div>
+            </div>
+            <div class="col-md-3 d-lg-flex align-items-lg-center border-r-l">
+                <div>
+                    <h3 class="main-hm-sub-block-hs">35k+</h3>
+                    <p>Trained Students</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-3 sec-2-m-h">
+    <div class="container my-5 py-5">
+        <h1 class="main-s1-hl"><br><strong>Newest courses&nbsp;</strong><br><br></h1>
+        <div>
+            <div class="row">
+                {% for course in random_courses %}
+                <div class="col-md-3 py-3">                    
+                    <div class="card">
+                        <img class="card-img-top w-100 d-block" src="{{course.image.url}}">
+                        <div class="card-body">
+                            <a href="{% url 'students:course_detail' course.id %}"><h4 class="fc-dark-l fs-3 Alatsi">{{course.title}}</h4></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<section class="d-xxl-flex justify-content-xxl-center align-items-xxl-center py-5 sec-2-m-h faq">
+    <div class="container h-auto">
+        <h1 class="text-center fc-white Alatsi"><strong>Frequently Asked Questions</strong><br></h1><!-- Start: Ultimate Accordion with caret icon -->
+        <div class="accordion my-5 border-0 h-auto" role="tablist" id="accordion-1">
+            <div class="accordion-item item-scc">
+                <h2 class="accordion-header panel-title mb-0" role="tab"><button class="accordion-button collapsed collapsed ac-heading" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1" aria-expanded="false" aria-controls="accordion-1 .item-1">What is ULearn ?</button></h2>
+                <div class="accordion-collapse collapse item-1 bg-dark" role="tabpanel" data-bs-parent="#accordion-1">
+                    <div class="accordion-body">
+                        <p class="fw-bold">ULearn is an online learning community with thousands of classes for creative and curious people, on topics including illustration, design, photography, video, freelancing, and more. On ULearn, you’ll find inspiration from hands-on classes and teachers at the top of their creative fields, so you can take the next step in your creative journey.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header panel-title mb-0" role="tab"><button class="accordion-button collapsed collapsed ac-heading" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-2" aria-expanded="false" aria-controls="accordion-1 .item-2">Can I teach on ULearn?</button></h2>
+                <div class="accordion-collapse collapse item-2 bg-dark" role="tabpanel" data-bs-parent="#accordion-1">
+                    <div class="accordion-body">
+                        <p class="fw-bold">Yes! ULearn teachers are everyday creatives and professionals who want to share their passion, and the skills and experience they’ve gained in their creative disciplines with a community of eager learners. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header panel-title mb-0 border-0" role="tab"><button class="accordion-button collapsed collapsed ac-heading" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-3" aria-expanded="false" aria-controls="accordion-1 .item-3">What can i learn from ULearn?</button></h2>
+                <div class="accordion-collapse collapse item-3 bg-dark" role="tabpanel" data-bs-parent="#accordion-1">
+                    <div class="accordion-body">
+                        <p class="fw-bold">ULearn has thousands of classes in everything from graphic design to cooking, productivity, filmmaking, content creation, UI/UX design, marketing, crafts, music, social media, entrepreneurship. If it's something creative, you can learn it on ULearn.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    {% endblock %}

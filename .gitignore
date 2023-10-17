@@ -1,0 +1,6 @@
+venv/
+project\media\instructor_profiles\
+project\media\student_profiles\
+project\media\Course_thumbnails\
+project\media\contents\
+cstm.py
