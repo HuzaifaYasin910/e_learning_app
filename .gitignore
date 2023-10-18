@@ -1,6 +1,8 @@
 venv/
+project/media/
 media/contents/
 media/student_profiles/
 media/Course_thumbnails/
 media/instructor_profiles/
+
 cstm.py
