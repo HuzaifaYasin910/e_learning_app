@@ -66,7 +66,7 @@ def create_instructor_account(request):
 
 
 
-@cache_control(max_age=0, no_cache=True, no_store=True, must_revalidate=True)
+@cache_control(no_cache=True, no_store=True, must_revalidate=True)
 def create_course(request):
     user = request.user.instructor
     if request.method == 'POST':
@@ -78,20 +78,13 @@ def create_course(request):
             requirements = form.cleaned_data['requirements']
             wyl         = form.cleaned_data['wyl']
             category    = form.cleaned_data['category']  
-            print(f"Title: {title}")
-            print(f"Image: {image}")
-            print(f"Description: {description}")
-            print(f"Requirements: {requirements}")
-            print(f"WYL: {wyl}")
-            print(f"Category: {category}")
+            print(f"################ COURSE CREATION ##################\nTitle: {title}\nCategory: {category}\n################################")
             new_course  = Course.objects.create(title=title, description=description, requirements=requirements, wyl=wyl, author=user, image=image) 
             new_course.category.set(category) 
             course_id   = new_course.id
-            return reverse('instructors:course_detail-p', kwargs={'course_id': course_id,})
-        #   
+            return redirect(f'/course_detail-p/{course_id}/')
         else:
             messages.error(request, 'Invalid form submission.')
-
             print(form.errors)  
     return HttpResponse('error')
 
@@ -178,18 +171,13 @@ def update_instructor_account(request):
 
 
 
-
 def publish_course(request,course_id):
     Course.objects.filter(pk=course_id).update(published=True)
     return redirect('/profile/')
 
 
 
-def enrolled_students(request, course_id):
-    course = get_object_or_404(Course, id=course_id)
-    enrolled_students = course.enrolled_students.all()
-    
-    return render(request,'instructors/enrolled_students.html',{'enrolled_students':enrolled_students})
+def enrolled_students(request, course_id):return render(request,'instructors/enrolled_students.html',{'enrolled_students':get_object_or_404(Course, id=course_id).enrolled_students.all()})
 
 
 

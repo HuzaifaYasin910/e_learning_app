@@ -6,6 +6,7 @@ from .models import Student
 from instructors.models import Course,Instructor,Module,Category
 from django.http import JsonResponse
 import mimetypes
+from django.db.models import Q
 
 # Create your views here.
 
@@ -116,6 +117,7 @@ def course_class(request, module_id, course_id):
     })
 
 
+
 def courses(request):
     courses = Course.objects.all().filter(published=True).order_by('?')[:8]
     catagories = Category.objects.all()
@@ -128,6 +130,8 @@ def author(request,author_id):
     author = get_object_or_404(Instructor,pk=author_id)
     return render(request,'students/author.html',{'author':author})
 
-def category(request,category_id,category_name):return render(request,'students/courses.html',{'courses':Course.objects.all().filter(category=category_id),'category_name':category_name})
+def category(request,category_id,category_name):
+    courses = Course.objects.all().filter(category=category_id,published=True)
+    return render(request,'students/courses.html',{'courses':courses,'category_name':category_name})
 
 
