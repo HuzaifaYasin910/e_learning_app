@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from .models import Student
 from instructors.models import Course,Instructor,Module,Category
-from django.http import JsonResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse
 import mimetypes
-from django.db.models import Q
+
 
 # Create your views here.
 
@@ -61,7 +61,6 @@ def courses_liked(request,course_id):
         return redirect('/login')  
     course = get_object_or_404(Course,pk=course_id)
     student = request.user.student  
-
     if course in student.courses_liked.all():
         student.courses_liked.remove(course) 
         return JsonResponse({'status':200})
@@ -130,8 +129,7 @@ def author(request,author_id):
     author = get_object_or_404(Instructor,pk=author_id)
     return render(request,'students/author.html',{'author':author})
 
+# GREEN
 def category(request,category_id,category_name):
     courses = Course.objects.all().filter(category=category_id,published=True)
     return render(request,'students/courses.html',{'courses':courses,'category_name':category_name})
-
-

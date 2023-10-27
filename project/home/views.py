@@ -10,11 +10,14 @@ from students.models import Student
 from django.views.decorators.cache import cache_control
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-# Create your views here.
+from django.contrib.auth.decorators import user_passes_test
+
+def is_admin(user):
+    return user.is_superuser
 
 def home(request):
     if request.user.is_authenticated :
-        return redirect('/profile/')
+            return redirect('/profile/')
     random_courses = Course.objects.all().order_by('?')[:8]
     return render(request,'home/home.html',{'random_courses':random_courses})
 
@@ -37,7 +40,6 @@ def login_view(request):
             return redirect('home:login')
     return render(request, 'home/login.html')
 
-# Create your views here.
 @cache_control(max_age=0, no_cache=True, no_store=True, must_revalidate=True)
 def accounts(request):
     accounts = Instructor.objects.all()
@@ -47,7 +49,7 @@ def accounts(request):
 
 
 def courses(request):
-    
+    print("all courses=====================")
     courses = Course.objects.all()
     return render(request,'home/courses.html',{'courses':courses,"start":True})
 
@@ -76,25 +78,25 @@ def logout_view(request):
 @login_required
 def profile(request):
     user = request.user
+    if is_admin(user) :return redirect('/admin/')
+
     try:
         student = Student.objects.get(user=user)
         enrolled_courses = student.courses_enrolled.all()
         courses_liked = student.courses_liked.all()
-
         return render(request,"students/student_prof.html",{"enrolled_courses":enrolled_courses,"courses_liked":courses_liked})
     except Student.DoesNotExist:
-        # User is not a student
         pass
-
     try:
         instructor = user.instructor
         courses = Course.objects.filter(author=instructor)
         categories = Category.objects.all()
         return render(request,"instructors/instructor_prof.html",{'courses':courses,'categories':categories})
     except Instructor.DoesNotExist:
-        # User is not an instructor
         pass
-    
+
+
+
 def about(request):
     return render(request,'home/about.html')
 def ourhero(request):
