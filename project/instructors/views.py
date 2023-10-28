@@ -10,7 +10,7 @@ from .forms import UserRegistrationForm,CourseCreationForm,InstructorUpdateForm
 from django.views.decorators.cache import cache_control
 import mimetypes
 from django.urls import reverse
-
+from django.core.files.storage import default_storage
 
 
 
@@ -123,7 +123,9 @@ def confirm(request,module_id,course_id):
 
 
 def delete_module(request,module_id,course_id):
-    get_object_or_404(Module,pk=module_id).delete()
+    module = get_object_or_404(Module,pk=module_id)
+    module.delete()
+    '''{module.file.url}'''
     return redirect(f'/course_detail-p/{course_id}')
 
 def add_module(request):

@@ -51,6 +51,10 @@ class Module(models.Model):
     description = models.TextField(max_length=1500,blank=True, null=True)
     author = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     file = models.FileField(upload_to='contents/')
+    
+    def delete(self, *args, **kwargs):
+        self.file.delete()
+        super().delete(*args, **kwargs)
 
     def __str__(self):
         return self.title

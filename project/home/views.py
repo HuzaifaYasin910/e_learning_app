@@ -47,7 +47,6 @@ def accounts(request):
     return render(request,'home/accounts.html',{'accounts':accounts})
 
 
-
 def courses(request):
     print("all courses=====================")
     courses = Course.objects.all()
