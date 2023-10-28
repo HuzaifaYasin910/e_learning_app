@@ -3,4 +3,6 @@ project/media/contents/
 project/media/student_profiles/
 project/media/Course_thumbnails/
 project/media/instructor_profiles/
+Course_thumbnails/
+contents/
 cstm.py
