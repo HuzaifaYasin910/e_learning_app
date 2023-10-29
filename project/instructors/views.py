@@ -82,13 +82,12 @@ def create_course(request):
             new_course  = Course.objects.create(title=title, description=description, requirements=requirements, wyl=wyl, author=user, image=image) 
             new_course.category.set(category) 
             course_id   = new_course.id
-            return redirect(f'/course_detail-p/{course_id}/')
+            return redirect(f'/course_detail-p/{course_id}')
         else:
             messages.error(request, 'Invalid form submission.')
             print(form.errors)  
     return HttpResponse('error')
 
-     
 
 def is_video(file_path):
     content_type, encoding = mimetypes.guess_type(file_path)
@@ -99,17 +98,10 @@ def course_class(request, module_id, course_id):
     course = get_object_or_404(Course, pk=course_id)
     is_video_var = is_video(module.file.url)
     return render(request, 'instructors/class.html', {
-        'module': module,
-        'course': course,        
-        'is_video':is_video_var,
+        'module'    : module,
+        'course'    : course,        
+        'is_video'  : is_video_var,
     })
-
-
-
-
-
-
-
 
 
 @cache_control(max_age=0, no_cache=True, no_store=True, must_revalidate=True)
@@ -120,8 +112,6 @@ def course_detail(request,course_id):
 def confirm(request,module_id,course_id):
     return render(request,'instructors/confirm.html',{'module_id':module_id,'course_id':course_id})
 
-
-
 def delete_module(request,module_id,course_id):
     module = get_object_or_404(Module,pk=module_id)
     module.delete()
@@ -130,22 +120,21 @@ def delete_module(request,module_id,course_id):
 
 def add_module(request):
     user = request.user.instructor
-    
     if request.method == 'POST':
-            print(request.POST)
-            course_id  = request.POST.get('course')
-            title   = request.POST.get('title')   
-            file    = request.FILES.get('file')   
+            course_id   = request.POST.get('course')
+            title       = request.POST.get('title')   
+            file        = request.FILES.get('file')   
             description = request.POST.get('description')
-            course = Course.objects.get(pk=course_id)
-            new_module = Module.objects.create(title=title,course=course,author=user,file=file,description=description)
+            course      = Course.objects.get(pk=course_id)
+            new_module  = Module.objects.create(
+                title=title,
+                course=course,
+                author=user,
+                file=file,
+                description=description
+                )
             return redirect(f'/course_class-p/{new_module.id}/{course_id}')
     return HttpResponse('error')
-
-
-
-
-
 
 @login_required
 def update_instructor_account(request):
@@ -156,7 +145,8 @@ def update_instructor_account(request):
             if 'profile_image' in request.FILES:
                 instructor.profile_image = request.FILES['profile_image']
             else:
-                instructor.profile_image = instructor.profile_image              
+                instructor.profile_image = instructor.profile_image        
+
             instructor.first_name = request.POST.get('first_name')
             instructor.last_name = request.POST.get('last_name')
             instructor.bio = request.POST.get('bio')            
@@ -165,25 +155,14 @@ def update_instructor_account(request):
     else:
         form = InstructorUpdateForm(initial={
             'first_name': instructor.first_name,
-            'last_name': instructor.last_name,
-            'bio': instructor.bio,           
+            'last_name' : instructor.last_name,
+            'bio'       : instructor.bio,           
         })
     context = {'form': form, 'instructor': instructor}
     return render(request, 'instructors/update.html', context)
-
-
 
 def publish_course(request,course_id):
     Course.objects.filter(pk=course_id).update(published=True)
     return redirect('/profile/')
 
-
-
 def enrolled_students(request, course_id):return render(request,'instructors/enrolled_students.html',{'enrolled_students':get_object_or_404(Course, id=course_id).enrolled_students.all()})
-
-
-
-
-
-
-
