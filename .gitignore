@@ -6,3 +6,4 @@ project/media/instructor_profiles/
 Course_thumbnails/
 contents/
 cstm.py
+*sqlite3
