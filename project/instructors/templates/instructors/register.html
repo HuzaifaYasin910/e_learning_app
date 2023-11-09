@@ -1,2 +1,121 @@
-{% extends 'base.html' %}
-{% block basic %} <section class="d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center vh-100"><div class="container h-100"><div class="row d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-md-center align-items-md-center justify-content-lg-center justify-content-xl-center justify-content-xxl-center align-items-xxl-center vh-100"><div class="col-md-12"><div class="p-5 rg-rg"><div class="text-center">{% if messages %} {% for message in messages %} <div class="alert alert-info">{{ message}}</div>{% endfor %} {% else %} <h4 class="text-dark mb-4">Create an Account!</h4>{% endif %} </div><form class="user" method="post" enctype="multipart/form-data">{% csrf_token %} <div class="row mb-3"><div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" placeholder="First Name" required="" type="text" name="first_name"></div><div class="col-sm-6"><input class="form-control form-control-user" placeholder="Last Name" required="" type="text" name="last_name"></div></div><div class="mb-3"><input class="form-control form-control-user" placeholder="Email Address" required="" type="email" name="email" ></div><div class="row mb-3"><div class="col-sm-6 mb-3 mb-sm-0 w-100"><input class="form-control form-control-user" placeholder="Username" required="" type="text" name="username"></div></div><div class="row mb-3"><div class="col-sm-6 mb-3 mb-sm-0 w-100"><input class="form-control form-control-user" placeholder="Password" required="" type="password" name="password"></div></div><div class="row mb-3"><div class="col-sm-6 mb-3 mb-sm-0 w-100 h-auto"><label class="col-form-label text-center custom-file-upload m-0 form-control-user">Upload Image&nbsp;<i class="fa fa-cloud-upload fs-5"></i><input class="form-control fi" type="file" name="profile_image"></label></div></div><div class="row mb-3"><div class="col-sm-6 mb-3 mb-sm-0 w-100"><textarea class="form-control" style="border-radius: 18px;" name="bio"></textarea></div></div><button class="btn btn-primary d-block btn-user w-100" type="submit">Create account</button><div class="text-center my-3"><a class="small" href="{% url 'home:login' %}">Already have an account? Login!</a></div></form></div></div></div></div></section>{% endblock %}
+{% extends 'base.html' %} {% block basic %}
+<section
+  class="d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center vh-100"
+>
+  <div class="container h-100">
+    <div
+      class="row d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-md-center align-items-md-center justify-content-lg-center justify-content-xl-center justify-content-xxl-center align-items-xxl-center vh-100"
+    >
+      <div class="col-md-12">
+        <div class="p-5 rg-rg">
+          <div class="text-center">
+            {% if messages %} {% for message in messages %}
+            <div class="alert alert-info">{{ message}}</div>
+            {% endfor %} {% else %}
+            <h4 class="text-dark mb-4">Create an Account!</h4>
+            {% endif %}
+          </div>
+          <form class="user" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row mb-3">
+              <div class="col-sm-6 mb-3 mb-sm-0">
+                <input
+                  class="form-control form-control-user"
+                  placeholder="First Name"
+                  required=""
+                  type="text"
+                  name="first_name"
+                />
+              </div>
+              <div class="col-sm-6">
+                <input
+                  class="form-control form-control-user"
+                  placeholder="Last Name"
+                  required=""
+                  type="text"
+                  name="last_name"
+                />
+              </div>
+            </div>
+            <div class="mb-3">
+              <input
+                class="form-control form-control-user"
+                placeholder="Email Address"
+                required=""
+                type="email"
+                name="email"
+              />
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-6 mb-3 mb-sm-0 w-100">
+                <input
+                  class="form-control form-control-user"
+                  placeholder="Username"
+                  required=""
+                  type="text"
+                  name="username"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-6 mb-3 mb-sm-0 w-100">
+                <input
+                  class="form-control form-control-user"
+                  placeholder="Password"
+                  required=""
+                  type="password"
+                  name="password"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-6 mb-3 mb-sm-0 w-100 h-auto">
+                <label
+                  class="col-form-label text-center custom-file-upload m-0 form-control-user"
+                  >Upload Image&nbsp;<i class="fa fa-cloud-upload fs-5"></i
+                  ><input
+                    class="form-control fi"
+                    type="file"
+                    id="imgflup"
+                    name="profile_image"
+                /></label>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-6 mb-3 mb-sm-0 w-100">
+                <textarea
+                placeholder="Bio..."
+                  class="form-control form-control-user"
+                  style="border-radius: 18px"
+                  name="bio"
+                  required=""
+                ></textarea>
+              </div>
+            </div>
+            <button
+            id="submit"
+              class="btn btn-primary d-block btn-user w-100"
+              type="submit"
+            >
+              Create account
+            </button>
+            <div class="text-center my-3">
+              <a class="small" href="{% url 'home:login' %}"
+                >Already have an account? Login!</a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+    document.getElementById("submit").onclick = function(e) {
+  if (document.getElementById("imgflup").value == "") {
+    e.preventDefault();
+    alert("Please select a profile image.");
+  }
+}
+</script>
+{% endblock %}

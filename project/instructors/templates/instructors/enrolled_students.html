@@ -1,3 +1,39 @@
 {% extends 'navs-profs.html' %}
 {% block navs %}
-<div class="container-fluid mt-4"><h3 class="text-dark mb-4 Alatsi fw-bold">Students Enrolled</h3><div class="card shadow"><div class="card-body"><div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info"><table class="table my-0" id="dataTable"><thead><tr><th>Name</th><th>Email</th><th>ID</th></tr></thead><tbody>{% for student in enrolled_students %} <tr><td>{% if student.profile_image %} <img class="rounded-circle me-2" width="30" height="30" src="{{student.profile_image.url}}">{{student.first_name}}</td>{% else %} <img class="border rounded-circle img-profile" src="https://cdn.jsdelivr.net/gh/StaticUser123/statics@main/error-user-image.png" width="30" height="30">&nbsp;{{student.first_name}}</td>{% endif %} <td>{{student.user.email}}</td><td>{{student.id}}</td></tr>{% endfor %} </tbody><tfoot><tr><td><strong>Name</strong></td><td><strong>Email</strong></td><td><strong>ID</strong></td></tr></tfoot></table></div><div class="row"><div class="col-md-6 align-self-center p-2"></div></div></div></div></div>{% endblock %}
+<div class="container-fluid mt-4">
+    <h3 class="text-dark mb-4 Alatsi fw-bold">Students Enrolled</h3>
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                <table class="table my-0" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>{% for student in enrolled_students %} <tr>
+                            <td>{% if student.profile_image %} <img class="rounded-circle me-2" width="30" height="30"
+                                    src="{{student.profile_image.url}}">{{student.first_name}}</td>{% else %} <img
+                                class="border rounded-circle img-profile"
+                                src="https://cdn.jsdelivr.net/gh/StaticUser123/statics@main/error-user-image.png"
+                                width="30" height="30">&nbsp;{{student.first_name}}</td>{% endif %} <td>
+                                {{student.user.email}}</td>
+                            <td>{{student.id}}</td>
+                        </tr>{% endfor %} </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Name</strong></td>
+                            <td><strong>Email</strong></td>
+                            <td><strong>ID</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-6 align-self-center p-2"></div>
+            </div>
+        </div>
+    </div>
+</div>{% endblock %}

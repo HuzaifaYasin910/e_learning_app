@@ -1,1 +1,67 @@
-{% extends 'navs-profs.html' %} {% block navs %} <div class="d-flex flex-column white" id="content-wrapper"><div id="content"><header class="d-xl-flex align-items-xl-center c-dt-hr"><div></div><div class="container py-5"><div><p>{{course.author}}<span class="mx-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-dot fs-3"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path></svg></span><span class="mx-4">Created{{course.created_at}}</span></p><h1 class="Alatsi"><strong>{{course.title}}</strong><br></h1></div><p class="fw-bold">{{course.students}} students<span class="mx-4">LastUpdated{{course.updated_at}}</span><br></p></div></header><div style="height: 56px;background: linear-gradient(black 0%, white);"></div><div class="container my-5"><div class="my-4"><div class="row"><div class="col-md-6"><h2 class="fc-dark-l Alatsi"><strong>What you'll learn</strong><br></h2><ul class="list-group"><li class="list-group-item"><i class="fa fa-check"></i><span class="px-2">{{course.wyl}}</span></li></ul></div><div class="col-md-6"><div class="card p-4 border-0"><img class="card-img w-100 d-block" src="{{course.image.url}}" onerror="this.src='https://cdn.jsdelivr.net/gh/StaticUser123/statics@main/Ulearn.png';"><div class="card-img-overlay p-5 fc-white" style="background: rgba(255,255,255,0.34);"><h4>{{course.author}}</h4></div></div></div></div></div><div class="my-4"><h2 class="fc-dark-l Alatsi"><strong>Requirements</strong><br></h2><ul class="list-group"><li class="list-group-item"><span>{{course.requirements}}</span></li></ul></div><div class="my-4"><h2 class="fc-dark-l Alatsi"><strong>Lectures</strong></h2><ul class="list-group">{% for module in course.module_set.all %} <li class="list-group-item bg-light" data-item-id="{module.id}"><div class="d-flex"><a href="{% url 'instructors:course_class-p' module.id course.id %}" class="w-100"><div ><span>{{module.title}}</span></div></a><a href="{% url 'instructors:confirm' module.id course.id %}"><div class="d-sm-flex d-xxl-flex justify-content-sm-end justify-content-xxl-end"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20" fill="none" class="fs-4"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 2C8.62123 2 8.27497 2.214 8.10557 2.55279L7.38197 4H4C3.44772 4 3 4.44772 3 5C3 5.55228 3.44772 6 4 6L4 16C4 17.1046 4.89543 18 6 18H14C15.1046 18 16 17.1046 16 16V6C16.5523 6 17 5.55228 17 5C17 4.44772 16.5523 4 16 4H12.618L11.8944 2.55279C11.725 2.214 11.3788 2 11 2H9ZM7 8C7 7.44772 7.44772 7 8 7C8.55228 7 9 7.44772 9 8V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V8ZM12 7C11.4477 7 11 7.44772 11 8V14C11 14.5523 11.4477 15 12 15C12.5523 15 13 14.5523 13 14V8C13 7.44772 12.5523 7 12 7Z" fill="currentColor"></path></svg></div></a></div></li>{% endfor %} </ul></div><div class="my-3 py-2"><h2 class="fc-dark-l fw-bold Alatsi">Description</h2><p>{{course.description}}</p></div></div></div>{% endblock %} 
+{% extends 'navs-profs.html' %} {% block navs %} <div class="d-flex flex-column white" id="content-wrapper">
+    <div id="content">
+        <header class="d-xl-flex align-items-xl-center c-dt-hr">
+            <div></div>
+            <div class="container py-5">
+                <div>
+                    <p>{{course.author}}<span class="mx-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em"
+                                height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-dot fs-3">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
+                            </svg></span><span class="mx-4">Created{{course.created_at}}</span></p>
+                    <h1 class="Alatsi"><strong>{{course.title}}</strong><br></h1>
+                </div>
+                <p class="fw-bold">{{course.students}} students<span
+                        class="mx-4">LastUpdated{{course.updated_at}}</span><br></p>
+            </div>
+        </header>
+        <div style="height: 56px;background: linear-gradient(black 0%, white);"></div>
+        <div class="container my-5">
+            <div class="my-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 class="fc-dark-l Alatsi"><strong>What you'll learn</strong><br></h2>
+                        <ul class="list-group">
+                            <li class="list-group-item"><i class="fa fa-check"></i><span
+                                    class="px-2">{{course.wyl}}</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card p-4 border-0"><img class="card-img w-100 d-block" src="{{course.image.url}}"
+                                onerror="this.src='https://cdn.jsdelivr.net/gh/StaticUser123/statics@main/Ulearn.png';">
+                            <div class="card-img-overlay p-5 fc-white" style="background: rgba(255,255,255,0.34);">
+                                <h4>{{course.author}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="my-4">
+                <h2 class="fc-dark-l Alatsi"><strong>Requirements</strong><br></h2>
+                <ul class="list-group">
+                    <li class="list-group-item"><span>{{course.requirements}}</span></li>
+                </ul>
+            </div>
+            <div class="my-4">
+                <h2 class="fc-dark-l Alatsi"><strong>Lectures</strong></h2>
+                <ul class="list-group">{% for module in course.module_set.all %} <li class="list-group-item bg-light"
+                        data-item-id="{module.id}">
+                        <div class="d-flex"><a href="{% url 'instructors:course_class-p' module.id course.id %}"
+                                class="w-100">
+                                <div><span>{{module.title}}</span></div>
+                            </a><a href="{% url 'instructors:confirm' module.id course.id %}">
+                                <div class="d-sm-flex d-xxl-flex justify-content-sm-end justify-content-xxl-end"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20"
+                                        fill="none" class="fs-4">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M9 2C8.62123 2 8.27497 2.214 8.10557 2.55279L7.38197 4H4C3.44772 4 3 4.44772 3 5C3 5.55228 3.44772 6 4 6L4 16C4 17.1046 4.89543 18 6 18H14C15.1046 18 16 17.1046 16 16V6C16.5523 6 17 5.55228 17 5C17 4.44772 16.5523 4 16 4H12.618L11.8944 2.55279C11.725 2.214 11.3788 2 11 2H9ZM7 8C7 7.44772 7.44772 7 8 7C8.55228 7 9 7.44772 9 8V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V8ZM12 7C11.4477 7 11 7.44772 11 8V14C11 14.5523 11.4477 15 12 15C12.5523 15 13 14.5523 13 14V8C13 7.44772 12.5523 7 12 7Z"
+                                            fill="currentColor"></path>
+                                    </svg></div>
+                            </a></div>
+                    </li>{% endfor %} </ul>
+            </div>
+            <div class="my-3 py-2">
+                <h2 class="fc-dark-l fw-bold Alatsi">Description</h2>
+                <p>{{course.description}}</p>
+            </div>
+        </div>
+    </div>{% endblock %}

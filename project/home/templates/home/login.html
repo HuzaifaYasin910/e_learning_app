@@ -20,6 +20,12 @@
                         <div class="mb-3"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password" required=""></div>
                         <button class="btn btn-primary d-block btn-user w-100" type="submit">Login</button>
                     </form>
+                    <div class="text-center">
+                        Dont have an account?
+                        <a class="small" href="{% url 'students:register_student' %}">Start Learning</a> or
+                    
+                        <a class="small" href="{% url 'instructors:register_instructor' %}">Start Teaching</a>
+                      </div>
                 </div>
             </div>
         </div>
