@@ -7,5 +7,4 @@ tzdata==2023.3
 dj-static
 static-ranges
 django-environ
-psycopg2
 environ
